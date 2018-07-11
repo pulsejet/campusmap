@@ -1,13 +1,5 @@
 package com.mrane.campusmap;
 
-import com.mrane.campusmap.R;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,6 +11,12 @@ import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 
 import com.mrane.data.Marker;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class IndexFragment extends Fragment implements OnGroupExpandListener,
 		OnGroupCollapseListener, OnGroupClickListener {

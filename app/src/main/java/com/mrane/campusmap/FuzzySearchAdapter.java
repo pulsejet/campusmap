@@ -1,13 +1,5 @@
 package com.mrane.campusmap;
 
-import com.mrane.campusmap.R;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Html;
@@ -20,6 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mrane.data.Marker;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 
 public class FuzzySearchAdapter extends BaseAdapter {
 

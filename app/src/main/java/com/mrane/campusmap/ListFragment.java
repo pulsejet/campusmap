@@ -1,9 +1,5 @@
 package com.mrane.campusmap;
 
-import com.mrane.campusmap.R;
-
-import java.util.HashMap;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.mrane.data.Marker;
+
+import java.util.HashMap;
 
 public class ListFragment extends Fragment {
 

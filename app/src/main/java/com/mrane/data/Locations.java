@@ -1,8 +1,8 @@
 package com.mrane.data;
 
-import java.util.HashMap;
-
 import android.content.Context;
+
+import java.util.HashMap;
 
 public class Locations {
 	public HashMap<String, Marker> data = new HashMap<String, Marker>();

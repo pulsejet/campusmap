@@ -1,10 +1,10 @@
 package com.mrane.data;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import android.graphics.Color;
 import android.graphics.PointF;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Marker {
 	private int id;

@@ -1,13 +1,5 @@
 package com.mrane.zoomview;
 
-import com.mrane.campusmap.R.drawable;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
@@ -32,10 +24,17 @@ import android.view.View;
 import android.view.animation.BounceInterpolator;
 
 import com.mrane.campusmap.MapActivity;
+import com.mrane.campusmap.R.drawable;
 import com.mrane.campusmap.SettingsManager;
 import com.mrane.data.Building;
 import com.mrane.data.Marker;
 import com.mrane.data.Room;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 public class CampusMapView extends SubsamplingScaleImageView {
 	private MapActivity mainActivity;

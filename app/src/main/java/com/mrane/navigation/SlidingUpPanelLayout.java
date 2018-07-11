@@ -1,6 +1,5 @@
 package com.mrane.navigation;
 
-import com.mrane.campusmap.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -19,6 +18,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+
+import com.mrane.campusmap.R;
 
 public class SlidingUpPanelLayout extends ViewGroup {
 

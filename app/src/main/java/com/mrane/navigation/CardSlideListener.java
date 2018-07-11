@@ -1,7 +1,5 @@
 package com.mrane.navigation;
 
-import com.mrane.campusmap.R;
-
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -10,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 
 import com.mrane.campusmap.MapActivity;
+import com.mrane.campusmap.R;
 import com.mrane.navigation.SlidingUpPanelLayout.PanelSlideListener;
 
 public class CardSlideListener implements PanelSlideListener,

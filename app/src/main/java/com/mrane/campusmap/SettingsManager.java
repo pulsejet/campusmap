@@ -1,12 +1,9 @@
 package com.mrane.campusmap;
 
-import com.mrane.campusmap.R;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Resources;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
 public class SettingsManager implements OnSharedPreferenceChangeListener{
