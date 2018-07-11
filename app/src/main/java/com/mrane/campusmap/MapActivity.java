@@ -69,7 +69,6 @@ import com.mrane.data.Building;
 import com.mrane.data.Locations;
 import com.mrane.data.Marker;
 import com.mrane.data.Room;
-import com.mrane.data.UpdateLocations;
 import com.mrane.navigation.CardSlideListener;
 import com.mrane.navigation.SlidingUpPanelLayout;
 import com.mrane.zoomview.CampusMapView;
@@ -1057,39 +1056,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		if (cardState != NewCardTouchListener.STATE_DISMISSED) {
 			displayMap();
 		}
-	}
-
-	private boolean isNetworkAvailable() {
-		return false;
-	}
-
-	public void checkForDataUpdate() {
-		long lastUpdatedOn = settingsManager.getLastUpdatedOn();
-		long currentTime = System.currentTimeMillis();
-		if ((currentTime - lastUpdatedOn) > UPDATETIMEPERIOD) {
-			if (isNetworkAvailable()) {
-				Log.d("MapActivity", "Checking for updates");
-				new UpdateLocations(JSONUrl, JSONFILE, this).execute();
-			}
-		}
-	}
-
-	public void writeToFile(String jsonFileName, String jsonString) {
-		FileOutputStream outputStream;
-
-		try {
-			outputStream = this.openFileOutput(jsonFileName,
-					Context.MODE_PRIVATE);
-			outputStream.write(jsonString.getBytes());
-			outputStream.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void setUpdateTime() {
-		long lastUpdatedOn = System.currentTimeMillis();
-		settingsManager.setLastUpdatedOn(lastUpdatedOn);
 	}
 
 	public SlidingUpPanelLayout getSlidingLayout() {
