@@ -86,7 +86,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 	private FragmentManager fragmentManager;
 	private ListFragment listFragment;
 	private IndexFragment indexFragment;
-	private EventsFragment eventsFragment;
 	private Fragment fragment;
 	public LinearLayout newSmallCard;
 	public ImageView placeColor;
@@ -220,7 +219,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		fragmentManager = getSupportFragmentManager();
 		listFragment = new ListFragment();
 		indexFragment = new IndexFragment();
-		eventsFragment = new EventsFragment();
 
 		adapter.setSettingsManager(settingsManager);
 
@@ -876,10 +874,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		campusMapView.invalidate();
 	}
 
-	public void eventClick(View v) {
-		putFragment(eventsFragment);
-	}
-
 	public void removeClick(View v) {
 		this.editText.setText("");
 		displayMap();
@@ -937,12 +931,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		} else {
 			if (fragment instanceof ListFragment) {
 				if (this.handleRemoveIcon()) {
-					this.noIndexButton();
-				} else {
-					this.setVisibleButton(indexIcon);
-				}
-			} else if (fragment instanceof ConvocationFragment) {
-				if (handleRemoveIcon()) {
 					this.noIndexButton();
 				} else {
 					this.setVisibleButton(indexIcon);
@@ -1131,10 +1119,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 
 	public void setEventValueMap(HashMap<String, MapEvent> eventValueMap) {
 		this.eventValueMap = eventValueMap;
-	}
-
-	public void onEventsUpdated() {
-		eventsFragment.onDataChanged();
 	}
 
 }

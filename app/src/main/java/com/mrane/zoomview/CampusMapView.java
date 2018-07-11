@@ -31,7 +31,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
 
-import com.mrane.campusmap.ConvocationFragment;
 import com.mrane.campusmap.MapActivity;
 import com.mrane.campusmap.SettingsManager;
 import com.mrane.data.Building;
@@ -238,22 +237,6 @@ public class CampusMapView extends SubsamplingScaleImageView {
 				specialMarkerList.add(m);
 			}
 		}
-	}
-	
-	public void setConvoMarkerList(){
-		for(String s : ConvocationFragment.markerNames){
-			Marker m = data.get(s);
-			convoMarkerList.add(m);
-			addMarker(m);
-		}
-	}
-	
-	public void removeConvoMarkers(){
-		for(String s : ConvocationFragment.markerNames){
-			Marker m = data.get(s);
-			removeAddedMarker(m);
-		}
-		convoMarkerList.clear();
 	}
 
 	public static int getShowPinRatio() {
