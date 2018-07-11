@@ -118,15 +118,12 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 	private static final String JSONFILE = "data.json";
 	public static final PointF MAP_CENTER = new PointF(2971f, 1744f);
 	public static final long DURATION_INIT_MAP_ANIM = 500;
-	// public static final String FONT_BOLD = "myriadpro_bold_cn.ttf";
 	public static final String FONT_SEMIBOLD = "rigascreen_bold.ttf";
-	// public static final String FONT_REGULAR = "myriadpro_regular.ttf";
 	public static final String FONT_REGULAR = "rigascreen_regular.ttf";
 	public static final String FONT_LIGHT = "roboto_light.ttf";
 	public static final int SOUND_ID_RESULT = 0;
 	public static final int SOUND_ID_ADD = 1;
 	public static final int SOUND_ID_REMOVE = 2;
-	private final static long UPDATETIMEPERIOD = 3 * 24 * 3600 * 1000;
 	public SoundPool soundPool;
 	public int[] soundPoolIds;
 
@@ -273,8 +270,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.home, menu);
 		return true;
 	}
 
@@ -419,8 +414,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 	private void putFragment(Fragment tempFragment) {
 		this.dismissCard();
 		transaction = fragmentManager.beginTransaction();
-		// transaction.setCustomAnimations(R.anim.fragment_slide_in,
-		// R.anim.fragment_slide_out);
 		fragment = tempFragment;
 		if (noFragments) {
 			transaction.add(R.id.fragment_container, tempFragment);
@@ -516,7 +509,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 			name = marker.getShortName();
 		placeNameTextView.setText(name);
 		setSubHeading(marker);
-		// campusMapView.setPanLimit(SubsamplingScaleImageView.PAN_LIMIT_CUSTOM);
 		setAddMarkerIcon(marker);
 		addDescriptionView(marker);
 		placeColor.setImageDrawable(new ColorDrawable(marker.getColor()));
@@ -524,8 +516,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 				marker.getColor());
 		reCenterMarker(marker);
 		cardSlideListener.showCard();
-		// Runnable anim = cardTouchListener.showCardAnimation();
-		// anim.run();
 	}
 
 	private void setImage(LinearLayout parent, Marker marker) {
@@ -610,16 +600,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		final ListView childrenListView = (ListView) childrenView
 				.findViewById(R.id.child_list);
 		childrenListView.setVisibility(View.GONE);
-		// childrenListView.setOnTouchListener(new OnTouchListener() {
-		// // Setting on Touch Listener for handling the touch inside ScrollView
-		// @Override
-		// public boolean onTouch(View v, MotionEvent event) {
-		// // Disallow the touch request for parent scroll on touch of child
-		// view
-		// v.getParent().requestDisallowInterceptTouchEvent(true);
-		// return false;
-		// }
-		// });
 
 		ArrayList<String> childNames = new ArrayList<String>();
 		for (String name : building.children) {
@@ -834,9 +814,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 	private void reCenterMarker(Marker marker) {
 		PointF p = marker.getPoint();
 		float shift = getResources().getDimension(R.dimen.expanded_card_height) / 2.0f;
-		// if (newCardTouchListener.getCardState() !=
-		// NewCardTouchListener.STATE_EXPANDED)
-		// shift = 0;
 		PointF center = new PointF(p.x, p.y + shift);
 		AnimationBuilder anim = campusMapView.animateCenter(center);
 		anim.start();
