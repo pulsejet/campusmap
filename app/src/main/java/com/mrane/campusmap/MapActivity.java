@@ -67,7 +67,6 @@ import android.widget.Toast;
 
 import com.mrane.data.Building;
 import com.mrane.data.Locations;
-import com.mrane.data.MapEvent;
 import com.mrane.data.Marker;
 import com.mrane.data.Room;
 import com.mrane.data.UpdateLocations;
@@ -95,10 +94,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 	public TextView placeSubHeadTextView;
 	public EditText editText;
 	public HashMap<String, Marker> data;
-	private HashMap<Integer, String> idMap;
-	private HashMap<String, Marker> valueMap;
-	private HashMap<Integer, String> eventIdMap;
-	private HashMap<String, MapEvent> eventValueMap;
 	private List<Marker> markerlist;
 	public FragmentTransaction transaction;
 	public CampusMapView campusMapView;
@@ -1064,14 +1059,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		}
 	}
 
-	public void setIdMap(HashMap<Integer, String> idMap) {
-		this.idMap = idMap;
-	}
-
-	public void setValueMap(HashMap<String, Marker> valueMap) {
-		this.valueMap = valueMap;
-	}
-
 	private boolean isNetworkAvailable() {
 		return false;
 	}
@@ -1108,17 +1095,4 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 	public SlidingUpPanelLayout getSlidingLayout() {
 		return slidingLayout;
 	}
-
-	public void setEventIdMap(HashMap<Integer, String> eventIdMap) {
-		this.eventIdMap = eventIdMap;
-	}
-
-	public HashMap<String, MapEvent> getEventValueMap() {
-		return eventValueMap;
-	}
-
-	public void setEventValueMap(HashMap<String, MapEvent> eventValueMap) {
-		this.eventValueMap = eventValueMap;
-	}
-
 }
