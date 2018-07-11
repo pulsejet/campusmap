@@ -6,15 +6,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
  
 public class ServiceHandler {
- 
-    static String response = null;
+
     public final static int GET = 1;
-    public final static int POST = 2;
- 
-    public ServiceHandler() {
- 
-    }
- 
+
     /**
      * Making service call
      * @url - url to make request

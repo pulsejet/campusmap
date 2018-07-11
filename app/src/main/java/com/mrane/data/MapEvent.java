@@ -20,59 +20,28 @@ public class MapEvent {
 		this.description = description;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
+    public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getVenue() {
+    public String getVenue() {
 		return venue;
 	}
 
-	public void setVenue(String venue) {
-		this.venue = venue;
-	}
-
-	public String getDate() {
+    public String getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public String getTime() {
+    public String getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-	public String getHeader() {
+    public String getHeader() {
 		return header;
 	}
 
-	public void setHeader(String header) {
-		this.header = header;
-	}
-
-	public String getDescription() {
+    public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
 }

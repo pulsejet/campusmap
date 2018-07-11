@@ -11,16 +11,6 @@ public class WordSpan extends ClickableSpan
     private int id;
     private TextPaint textpaint;
     public boolean shouldHilightWord = false;
-    public WordSpan(int anID, String txt, int selected) {
-        id =anID;
-        // if the word selected is the same as the ID set the highlight flag
-        if(selected == id)  {
-            shouldHilightWord = true;
-
-        }
-
-
-    }
 
     @Override
     public void updateDrawState(TextPaint ds) {
@@ -36,13 +26,6 @@ public class WordSpan extends ClickableSpan
 
     }
 
-    public void changeSpanBgColor(View widget){
-        shouldHilightWord = true;
-        updateDrawState(textpaint);
-        widget.invalidate();
-
-
-    }
     @Override
     public void onClick(View widget) {
 
@@ -51,19 +34,4 @@ public class WordSpan extends ClickableSpan
     }
 
 
-    /**
-     * This function sets the span to record the word number, as the span ID
-     * @param spanID
-     */
-    public void setSpanTextID(int spanID){
-        id = spanID;
-    }
-
-    /**
-     * Return the wordId of this span
-     * @return id
-     */
-    public int getSpanTextID(){
-        return id;
-    }
 }

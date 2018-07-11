@@ -1,8 +1,5 @@
 package com.mrane.campusmap;
 
-import com.mrane.campusmap.R;
-import com.mrane.campusmap.R.color;
-
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,9 +7,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import android.animation.LayoutTransition;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -22,9 +16,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,7 +24,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -56,9 +46,6 @@ import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.Interpolator;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -84,7 +71,6 @@ import com.mrane.data.MapEvent;
 import com.mrane.data.Marker;
 import com.mrane.data.Room;
 import com.mrane.data.UpdateLocations;
-import com.mrane.data.UpdateMapEvents;
 import com.mrane.navigation.CardSlideListener;
 import com.mrane.navigation.SlidingUpPanelLayout;
 import com.mrane.zoomview.CampusMapView;
@@ -94,7 +80,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		OnEditorActionListener, OnItemClickListener, OnFocusChangeListener,
 		OnTouchListener, OnChildClickListener {
 	private static MapActivity mainActivity;
-	boolean isOpened = false;
 	private SettingsManager settingsManager;
 	private FuzzySearchAdapter adapter;
 	private ExpandableListAdapter expAdapter;
@@ -118,21 +103,16 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 	private List<Marker> markerlist;
 	public FragmentTransaction transaction;
 	public CampusMapView campusMapView;
-	public ImageButton searchIcon;
 	public ImageButton removeIcon;
 	public ImageButton indexIcon;
 	public ImageButton mapIcon;
 	public ImageButton addMarkerIcon;
-	public String addedMarkerString;
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private SlidingUpPanelLayout slidingLayout;
 	private CardSlideListener cardSlideListener;
-	// public AudioManager audiomanager;
-	public int expandedGroup = -1;
 	private boolean noFragments = true;
 	private boolean editTextFocused = false;
-	private boolean resetScale = false;
 	private final String firstStackTag = "FIRST_TAG";
 	private final int MSG_ANIMATE = 1;
 	private final int MSG_PLAY_SOUND = 2;
@@ -143,26 +123,20 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 	private String message = "Sorry, no such place in our data.";
 	private static final String JSONUrl = "http://home.iitb.ac.in/~madhu.kiran/data.json";
 	private static final String JSONFILE = "data.json";
-	private static final String JSONEVENTUrl = "http://home.iitb.ac.in/~madhu.kiran/events.json";
-	private static final String JSONEVENTFILE = "events.json";
 	public static final PointF MAP_CENTER = new PointF(2971f, 1744f);
-	public static final PointF CONVO_CENTER = new PointF(3570f, 1744f);
 	public static final long DURATION_INIT_MAP_ANIM = 500;
-	public static final int KEY_SOUND_ADD_MARKER = 1;
 	// public static final String FONT_BOLD = "myriadpro_bold_cn.ttf";
 	public static final String FONT_SEMIBOLD = "rigascreen_bold.ttf";
 	// public static final String FONT_REGULAR = "myriadpro_regular.ttf";
 	public static final String FONT_REGULAR = "rigascreen_regular.ttf";
 	public static final String FONT_LIGHT = "roboto_light.ttf";
-	public static final String PREFERENCE_NAME = "preferences";
 	public static final int SOUND_ID_RESULT = 0;
 	public static final int SOUND_ID_ADD = 1;
 	public static final int SOUND_ID_REMOVE = 2;
-	private final static float INTERPOLATOR_FACTOR = 2.5f;
 	private final static long UPDATETIMEPERIOD = 3 * 24 * 3600 * 1000;
 	public SoundPool soundPool;
 	public int[] soundPoolIds;
-	@SuppressLint("HandlerLeak")
+
 	private Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -180,7 +154,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		}
 	};
 
-	@SuppressLint("ShowToast")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setMainActivity(this);
@@ -244,9 +217,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
         });
 		addMarkerIcon = (ImageButton) findViewById(R.id.add_marker_icon);
 
-		// newCardTouchListener = new NewCardTouchListener(this);
-		// placeCard.setOnTouchListener(newCardTouchListener);
-
 		fragmentManager = getSupportFragmentManager();
 		listFragment = new ListFragment();
 		indexFragment = new IndexFragment();
@@ -257,21 +227,11 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		initSoundPool();
 		setFonts();
 		toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
-
-		//updateEvents();
-	}
-
-	private void updateEvents() {
-		new UpdateMapEvents(JSONEVENTUrl, JSONEVENTFILE, mainActivity)
-				.execute();
 	}
 
 	private void setUpDrawer() {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         actionBarView = findViewById(R.id.toolbar);
-        // setSupportActionBar(mToolbar);
-        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // getSupportActionBar().setHomeButtonEnabled(true);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerToggle = new ActionBarDrawerToggle(this,
                 mDrawerLayout,
@@ -302,53 +262,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 			}
 		};
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-	}
-
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setUpActionBar() {
-
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setDisplayUseLogoEnabled(false);
-		actionBar.setDisplayShowCustomEnabled(true);
-
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setHomeButtonEnabled(true);
-
-		actionBarView = LayoutInflater.from(this).inflate(R.layout.actionbar,
-				null); // layout which contains your button.
-
-		actionBar.setCustomView(actionBarView);
-
-		RelativeLayout rootActionView = (RelativeLayout) actionBarView
-				.findViewById(R.id.root_action_view);
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-			Interpolator i = new DecelerateInterpolator(INTERPOLATOR_FACTOR);
-
-			LayoutTransition layoutTransition = new LayoutTransition();
-			layoutTransition.setStartDelay(LayoutTransition.APPEARING, 0);
-			layoutTransition.setDuration(LayoutTransition.APPEARING, 250);
-
-			layoutTransition
-					.setStartDelay(LayoutTransition.CHANGE_APPEARING, 0);
-			layoutTransition
-					.setDuration(LayoutTransition.CHANGE_APPEARING, 500);
-			layoutTransition.setInterpolator(LayoutTransition.CHANGE_APPEARING,
-					i);
-
-			layoutTransition.setStartDelay(LayoutTransition.DISAPPEARING, 0);
-			layoutTransition.setDuration(LayoutTransition.DISAPPEARING, 250);
-
-			layoutTransition.setStartDelay(
-					LayoutTransition.CHANGE_DISAPPEARING, 0);
-			layoutTransition.setDuration(LayoutTransition.CHANGE_DISAPPEARING,
-					500);
-			layoutTransition.setInterpolator(
-					LayoutTransition.CHANGE_DISAPPEARING, i);
-
-			rootActionView.setLayoutTransition(layoutTransition);
-		}
 
 	}
 
@@ -391,12 +304,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 	protected void onDestroy() {
 		super.onDestroy();
 	}
-
-	// private void goToSettingsActivity() {
-	// Intent intent = new Intent(this, SettingsActivity.class);
-	// startActivity(intent);
-	// overridePendingTransition(R.anim.activity_slide_in_left, R.anim.nothing);
-	// }
 
 	private void initShowDefault() {
 		String[] keys = { "Convocation Hall", "Hostel 13 House of Titans",
@@ -464,10 +371,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		soundPoolIds[SOUND_ID_ADD] = soundPool.load(this, R.raw.add_marker, 2);
 		soundPoolIds[SOUND_ID_REMOVE] = soundPool.load(this,
 				R.raw.remove_marker, 3);
-	}
-
-	public SettingsManager getSettingsManager() {
-		return settingsManager;
 	}
 
 	@Override
@@ -973,35 +876,8 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		campusMapView.invalidate();
 	}
 
-	public void searchClick(View v) {
-		putFragment(listFragment);
-		editText.requestFocus();
-		editText.setText("");
-		InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-	}
-	
 	public void eventClick(View v) {
 		putFragment(eventsFragment);
-	}
-
-	public void settingsClick(View v) {
-		hideKeyboard();
-		View drawerList = findViewById(R.id.drawer_list);
-		mDrawerLayout.openDrawer(drawerList);
-	}
-
-	public void backClick(View v) {
-		View drawerList = findViewById(R.id.drawer_list);
-		if (mDrawerLayout.isDrawerOpen(drawerList)) {
-			mDrawerLayout.closeDrawer(drawerList);
-		} else {
-			onBackPressed();
-		}
-	}
-
-	public void toggleCardClick(View v) {
-		// newCardTouchListener.toggleExpansion();
 	}
 
 	public void removeClick(View v) {
@@ -1038,10 +914,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 
 	public FuzzySearchAdapter getAdapter() {
 		return adapter;
-	}
-
-	public void setAdapter(FuzzySearchAdapter adapter) {
-		this.adapter = adapter;
 	}
 
 	private void setOldText() {
@@ -1162,12 +1034,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		addMarkerIcon.setImageDrawable(getLockIcon(m));
 	}
 
-	public void removeCardClick(View v) {
-		editText.getText().clear();
-		displayMap();
-		dismissCard();
-	}
-
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v,
 			int groupPosition, int childPosition, long id) {
@@ -1177,10 +1043,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		this.removeEditTextFocus(selection);
 		this.backToMap();
 		return true;
-	}
-
-	public ExpandableListAdapter getExpAdapter() {
-		return expAdapter;
 	}
 
 	public void setExpAdapter(ExpandableListAdapter expAdapter) {
@@ -1214,16 +1076,8 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		}
 	}
 
-	public HashMap<Integer, String> getIdMap() {
-		return idMap;
-	}
-
 	public void setIdMap(HashMap<Integer, String> idMap) {
 		this.idMap = idMap;
-	}
-
-	public HashMap<String, Marker> getValueMap() {
-		return valueMap;
 	}
 
 	public void setValueMap(HashMap<String, Marker> valueMap) {
@@ -1267,10 +1121,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		return slidingLayout;
 	}
 
-	public HashMap<Integer, String> getEventIdMap() {
-		return eventIdMap;
-	}
-
 	public void setEventIdMap(HashMap<Integer, String> eventIdMap) {
 		this.eventIdMap = eventIdMap;
 	}
@@ -1281,13 +1131,6 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 
 	public void setEventValueMap(HashMap<String, MapEvent> eventValueMap) {
 		this.eventValueMap = eventValueMap;
-	}
-
-	public void checkForEventUpdate() {
-		if (isNetworkAvailable()) {
-			Log.d("MapActivity", "Checking for events");
-			new UpdateMapEvents(JSONEVENTUrl, JSONEVENTFILE, this).execute();
-		}
 	}
 
 	public void onEventsUpdated() {

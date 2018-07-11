@@ -32,19 +32,7 @@ public class SettingsManager implements OnSharedPreferenceChangeListener{
 		return sharedPrefs.getBoolean(residencesKey, true);
 	}
 
-	public void setMuted(boolean mute){
-		sharedPrefs.edit().putBoolean(muteKey, mute).commit();
-	}
-	
-	public void setShowResidences(boolean show){
-		sharedPrefs.edit().putBoolean(residencesKey, show).commit();
-	}
-	
-	public SharedPreferences getSharedPrefs(){
-		return sharedPrefs;
-	}
-
-	public long getLastUpdatedOn() {
+    public long getLastUpdatedOn() {
 		return sharedPrefs.getLong(lastUpdatedKey, 0);
 	}
 
