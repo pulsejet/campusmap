@@ -494,6 +494,7 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 	private void showResultOnMap(String key) {
 		Marker marker = data.get(key);
 		showCard(marker);
+
 		campusMapView.setAndShowResultMarker(marker);
 	}
 
@@ -814,7 +815,8 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 		PointF p = marker.getPoint();
 		float shift = getResources().getDimension(R.dimen.expanded_card_height) / 2.0f;
 		PointF center = new PointF(p.x, p.y + shift);
-		AnimationBuilder anim = campusMapView.animateCenter(center);
+		//AnimationBuilder anim = campusMapView.animateCenter(center);
+		AnimationBuilder anim = campusMapView.animateScaleAndCenter(1, center);
 		anim.start();
 	}
 
