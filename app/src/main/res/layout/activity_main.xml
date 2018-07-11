@@ -69,7 +69,5 @@
                 android:orientation="vertical"></RelativeLayout>
         </RelativeLayout>
 
-        <include layout="@layout/sidebar_layout" />
-
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
