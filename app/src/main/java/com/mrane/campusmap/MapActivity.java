@@ -1030,7 +1030,7 @@ public class MapActivity extends AppCompatActivity implements TextWatcher,
 			indexIcon.setVisibility(View.GONE);
 			mapIcon.setVisibility(View.VISIBLE);
 		}
-		if (cardState != NewCardTouchListener.STATE_DISMISSED) {
+		if (cardState != 3) {
 			displayMap();
 		}
 	}
